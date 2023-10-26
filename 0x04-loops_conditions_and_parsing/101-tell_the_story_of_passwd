@@ -4,7 +4,7 @@ file="/etc/passwd"
 IFS=:
 while IFS= read -r line
 do
-        fields=($line)
+	read -ra fields <<< "$line"
         USERNAME="${fields[0]}"
 	PASSWORD="${fields[1]}"
 	USERID="${fields[2]}"
