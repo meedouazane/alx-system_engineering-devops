@@ -39,4 +39,5 @@ int main(void)
 	for (i = 0; i <= 4; i++)
 		zombie();
 	sleep(10);
+	infinite_while();
 }
