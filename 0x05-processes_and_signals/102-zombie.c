@@ -23,7 +23,10 @@ int zombie(void)
 	pid_t z = fork();
 
 	if (z > 0)
+	{
 		printf("Zombie process created, PID: %d\n", z);
+		sleep(10);
+	}
 	else
 		exit(0);
 }
@@ -38,7 +41,6 @@ int main(void)
 
 	for (i = 0; i <= 4; i++)
 		zombie();
-	sleep(1);
 	infinite_while();
-	return (EXIT_SUCCESS)
+	return (EXIT_SUCCESS);
 }
