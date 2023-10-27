@@ -25,7 +25,7 @@ int zombie(void)
 	if (z > 0)
 	{
 		printf("Zombie process created, PID: %d\n", z);
-		sleep(10);
+		sleep(1);
 	}
 	else
 		exit(0);
