@@ -9,12 +9,12 @@ elif [ "$1" == "start" ]; then
 elif [ "$1" == "stop" ]; then
 	echo "manage_my_process stopped"
 	pid=$(cat /var/run/my_process.pid)
-	kill $pid
+	kill "$pid"
 	rm -f /var/run/my_process.pid
 elif [ "$1" == "restart" ]; then
 	echo "manage_my_process restarted"
 	pid=$(cat /var/run/my_process.pid)
-        kill $pid
+        kill "$pid"
 	rm -f /var/run/my_process.pid
 	nohup ./manage_my_process > /dev/null 2>&1 &
 	echo $! > /var/run/my_process.pid
