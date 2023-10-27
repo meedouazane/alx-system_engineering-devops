@@ -15,6 +15,19 @@ int infinite_while(void)
 	return (0);
 }
 /**
+ * zombie - create zombie
+ * Return: 0
+ */
+int zombie(void)
+{
+	pid_t z = fork();
+
+	if (z > 0)
+		printf("Zombie process created, PID: %d\n", z);
+	else
+		exit(0);
+}
+/**
  * main - zombie function
  *
  * Return: Always 0.
@@ -22,17 +35,8 @@ int infinite_while(void)
 int main(void)
 {
 	int i = 0;
-	pid_t zombie;
 
 	for (i = 0; i <= 4; i++)
-	{
-		zombie = fork();
-		if (zombie > 0)
-		{
-			printf("Zombie process created, PID: %d\n", zombie);
-			sleep(2);
-		}
-		else
-			exit(0);
-	}
+		zombie();
+	sleep(10);
 }
