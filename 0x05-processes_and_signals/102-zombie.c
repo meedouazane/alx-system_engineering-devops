@@ -29,6 +29,7 @@ int zombie(void)
 	}
 	else
 		exit(0);
+	return (0);
 }
 /**
  * main - zombie function
