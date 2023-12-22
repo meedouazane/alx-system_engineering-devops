@@ -1,7 +1,7 @@
 # install flask from pip and ensure that depancances are installed
 
 # ensure that python present
-package { 'python3':
+package { 'python3.8':
   ensure   => present,
 }
 
