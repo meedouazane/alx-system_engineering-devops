@@ -1,15 +1,15 @@
 # install flask from pip and ensure that depancances are installed
 
 package { 'python3.8':
-  ensure   => present,
+  ensure   => '3.8.10',
 }
 
 package { 'python3-pip':
   ensure   => present,
 }
 
-package { 'werkzeug':
-  ensure   => installed,
+package { 'werkzeug 2.1.0':
+  ensure   => '2.1.0',
   provider => 'pip'
   require  => Package['python3-pip']
 }
