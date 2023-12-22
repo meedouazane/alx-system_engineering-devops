@@ -2,12 +2,12 @@
 
 # ensure that python present
 package { 'python3.8':
-  ensure   => present,
+  ensure => present,
 }
 
 # ensure that pip present
 package { 'python3-pip':
-  ensure   => present,
+  ensure => present,
 }
 
 # install flask 
