@@ -1,7 +1,14 @@
 # Ensure the existence of the SSH config file
 
-file { '/home/m311/.ssh/ssh_config':
-  ensure  => file,
-  mode    => '744',
-  content => "Host * \n\tIdentityFile ~/.ssh/school \n\tPasswordAuthentication no\n",
+file { '/root/.ssh/ssh_config':
+  ensure  => present,
+}
+file_line { 'Declare identity file':
+  path  => '/root/.ssh/ssh_config',
+  line  => 'IdentityFile ~/.ssh/school',
+}
+
+file_line { 'Turn off passwd auth':
+  path  => '/root/.ssh/ssh_config',
+  line  => 'PasswordAuthentication no',
 }
