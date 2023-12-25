@@ -1,15 +1,20 @@
 # Client configuration file (w/ Puppet)
 
 file { '/root/.ssh/ssh_config':
-  ensure  => file,
-  content => "Host *\nIdentityFile ~/.ssh/school\nPasswordAuthentication no\n",
+  ensure  => present,
 }
 
-augeas {'Client configuration':
-  context => '/files/root/.ssh/ssh_config',
-  changes => [
-    'set Host[1] *',
-    'set IdentityFile[1] ~/.ssh/school',
-    'set PasswordAuthentication[1] no',
-  ],
+file_line { 'Client configuration file':
+  path => '/root/.ssh/ssh_config',
+  line => 'Host *',
+}
+
+file_line { 'Client configuration file 2':
+  path => '/root/.ssh/ssh_config',
+  line => 'IdentityFile ~/.ssh/school',
+}
+
+file_line { 'Client configuration file 3':
+  path => '/root/.ssh/ssh_config',
+  line => 'PasswordAuthentication no',
 }
