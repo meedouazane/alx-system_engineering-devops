@@ -1,20 +1,6 @@
-# Client configuration file (w/ Puppet)
+# Ensure the existence of the SSH config file
 
 file { '/root/.ssh/ssh_config':
-  ensure => present,
-}
-
-file_line { 'Client configuration file':
-  path  => '/root/.ssh/ssh_config',
-  line  => 'Host *',
-}
-
-file_line { 'Client configuration file 2':
-  path  => '/root/.ssh/ssh_config',
-  line  => 'IdentityFile ~/.ssh/school',
-}
-
-file_line { 'Client configuration file 3':
-  path  => '/root/.ssh/ssh_config',
-  line  => 'PasswordAuthentication no',
+  ensure  => present,
+  content => "Host * \n\tIdentityFile ~/.ssh/school \n\tPasswordAuthentication no\n",
 }
