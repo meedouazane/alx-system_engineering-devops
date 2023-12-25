@@ -2,10 +2,14 @@
 
 file { '/root/.ssh/ssh_config':
   ensure  => file,
+  content => "Host *\nIdentityFile ~/.ssh/school\nPasswordAuthentication no\n",
 }
 
-file_line {'Client configuration':
-  path   => '/root/.ssh/ssh_config',
-  line   => ['Host *', 'IdentityFile ~/.ssh/school', 'PasswordAuthentication no'],
-  ensure => present,
+augeas {'Client configuration':
+  context => '/files/root/.ssh/ssh_config',
+  changes => [
+    'set Host[1] *',
+    'set IdentityFile[1] ~/.ssh/school',
+    'set PasswordAuthentication[1] no',
+  ],
 }
