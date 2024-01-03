@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #Install nginx web server
+sudo apt-get update
 sudo apt-get install nginx -y
 echo "server {
     listen 80 ;
