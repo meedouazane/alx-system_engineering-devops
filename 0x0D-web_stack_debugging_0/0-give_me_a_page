@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 # debugging script
-docker exec -it a79bfa45f8af /bin/bash
-echo 'Listen 8080' >> /etc/apache2/ports.conf
+#docker exec -it a79bfa45f8af /bin/bash
 service apache2 restart
