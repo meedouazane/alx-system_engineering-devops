@@ -11,5 +11,5 @@ echo "server {
         try_files \$uri \$uri/ =404;
     }
 }" > /etc/nginx/sites-available/default
-echo 'Hello World!' > /var/www/html/index.html
+sudo echo 'Hello World!' | sudo tee /var/www/html/index.html
 sudo service nginx restart
