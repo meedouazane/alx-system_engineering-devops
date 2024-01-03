@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # debugging script
 #docker exec -it a79bfa45f8af /bin/bash
-service apache2 restart
+service apache2 start
