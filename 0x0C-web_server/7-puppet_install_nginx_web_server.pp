@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #Install Nginx web server
 
 #install nginx
@@ -10,6 +11,11 @@ file {'/var/www/html/index.html':
   ensure  => file,
   content => 'Hello World!',
 }
+service { 'nginx':
+  ensure => running,
+  enable => true,
+  require => Package['nginx'],
+ }
 
 file {'/etc/nginx/sites-available/default':
   ensure  => file,
@@ -27,4 +33,5 @@ server {
 		return 301 /;
 	}
 }',
+  notify => Service['nginx'],
 }
