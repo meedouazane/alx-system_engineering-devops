@@ -6,33 +6,14 @@ package {'nginx':
   ensure   => 'installed',
   provider => apt,
 }
-
-file {'/var/www/html/index.html':
-  ensure  => file,
-  content => 'Hello World!',
+file_line { 'Add a custom HTTP header':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server;',
+  line   => 'add_header X-Served-By $hostname;'
 }
 service { 'nginx':
-  ensure => running,
-  enable => true,
+  ensure  => running,
+  enable  => true,
   require => Package['nginx'],
- }
-
-file {'/etc/nginx/sites-available/default':
-  ensure  => file,
-  content => '
-server {
-	listen 80 ;
-	listen [::]:80;
-	root /var/www/html;
-	index index.html;
-	server_name _;
-	location / {
-		try_files $uri $uri/ =404;
-		add_header X-Served-By \$hostname always;
-	}
-	location /redirect_me {
-		return 301 /;
-	}
-}',
-  notify => Service['nginx'],
 }
