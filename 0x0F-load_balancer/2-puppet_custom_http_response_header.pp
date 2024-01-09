@@ -6,13 +6,13 @@ exec { 'update server':
   user     => 'root',
   provider => 'shell',
 }
-->
+
 # install nginx
 package { 'nginx':
   ensure   => present,
   provider => 'apt'
 }
-->
+
 # adding config
 file_line { 'add HTTP header':
   ensure => 'present',
@@ -20,7 +20,7 @@ file_line { 'add HTTP header':
   after  => 'listen 80 default_server;',
   line   => 'add_header X-Served-By $hostname;'
 }
-->
+
 # restarting service
 service { 'nginx':
   ensure  => 'running',
