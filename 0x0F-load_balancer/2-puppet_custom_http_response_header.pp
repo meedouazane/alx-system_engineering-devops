@@ -9,7 +9,7 @@ exec { 'update server':
 
 #install nginx
 package {'nginx':
-  ensure   => 'installed',
+  ensure   => present,
   provider => apt,
 }
 
