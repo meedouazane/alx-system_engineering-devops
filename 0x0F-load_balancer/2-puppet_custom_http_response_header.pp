@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 #Install Nginx web server
 
+# update ubuntu server
+exec { 'update server':
+  command  => 'apt-get update',
+  user     => 'root',
+  provider => 'shell',
+}
+->
 #install nginx
 package {'nginx':
   ensure   => 'installed',
   provider => apt,
 }
 ->
+# editing config file
 file {'/etc/nginx/sites-available/default':
   ensure  => file,
   content => '
@@ -24,6 +32,7 @@ server {
   notify  => Service['nginx'],
 }
 ->
+# starting service
 service { 'nginx':
   ensure  => running,
   enable  => true,
