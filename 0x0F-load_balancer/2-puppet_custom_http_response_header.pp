@@ -1,5 +1,6 @@
 #Install Nginx web server
 
+#update system
 exec { 'update server':
   command  => 'apt-get update',
   user     => 'root',
@@ -12,13 +13,15 @@ package {'nginx':
   provider => apt,
 }
 
-file_line { 'adding line in HTTP header':
+# adding line in configuration file
+file_line { 'add HTTP header':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;',
   line   => 'add_header X-Served-By $hostname;'
 }
 
+# starting service
 service { 'nginx':
   ensure  => running,
   enable  => true,
