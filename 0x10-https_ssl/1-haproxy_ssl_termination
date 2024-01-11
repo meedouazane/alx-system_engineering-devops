@@ -42,6 +42,9 @@ frontend https-in
     reqadd X-Forwarded-Proto:\ https
     default_backend www-backend
 
+backend le-certbot-backend
+    server letsencrypt 127.0.0.1:8888
+
 backend servers
     balance roundrobin
     server 429410-web-01 54.167.181.186:80 check
