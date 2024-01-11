@@ -6,6 +6,9 @@ output ()
     echo "The subdomain $1 is a $2 record and points to $3"
 }
 sub=('www' 'web-01' 'web-02' 'lb-01')
+if [ "$#" -eq 0 ];then
+	exit
+fi
 if [ "$#" -eq 2 ];then
     SUB_DOMAIN="$2"
     RECORD_TYPE=$(dig "$2".bestmedi.tech | grep -A1 'ANSWER SECTION:' | awk -v w1="$1" -v w2="$2" '$0 ~ w1 && $0 ~ w2 {print $4}')
