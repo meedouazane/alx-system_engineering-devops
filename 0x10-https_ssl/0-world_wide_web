@@ -5,7 +5,7 @@ output ()
 {
     echo "The subdomain $1 is a $2 record and points to $3"
 }
-sub=('www' 'web-01' 'web-02' 'lb-01')
+sub=('lb-01' 'www' 'web-01' 'web-02')
 if [ "$#" -eq 0 ];then
 	exit
 fi
