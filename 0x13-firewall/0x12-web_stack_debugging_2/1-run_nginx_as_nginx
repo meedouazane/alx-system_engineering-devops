@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Run Nginx as Nginx
+sed -i 's/www-data/nginx/g' /etc/nginx/nginx.conf
+echo "server {
+    listen 8080 ;
+    listen [::]:8080;
+    root /var/www/html;
+    index index.html;
+    server_name _;
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}" >> /etc/nginx/sites-available/default
+service nginx restart
+echo  "nginx ALL=(ALL) !/usr/bin/apt remove *" > /etc/sudoers
