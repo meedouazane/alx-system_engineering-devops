@@ -5,24 +5,23 @@ import requests
 
 
 if __name__ == "__main__":
-    r0 = requests.get(
-                'https://jsonplaceholder.typicode.com/users')
-    re = r0.json()
-    for e_id in range(1, len(re) + 1):
-        r = requests.get(
-                f'https://jsonplaceholder.typicode.com/users/{e_id}')
-        response = r.json()
-        username = response['username']
-        r2 = requests.get(
-                f'https://jsonplaceholder.typicode.com/users/{e_id}/todos')
-        tasks = r2.json()
-        path = 'todo_all_employees.json.csv'
-        user_data = {
-            e_id: [
-                {"username": username, "task": i['title'],
-                 "completed": i['completed']}
-                for i in tasks
-                ]
-            }
-        with open(path, 'a', newline='') as jsonfile:
-            json.dump(user_data, jsonfile)
+    r1 = requests.get('https://jsonplaceholder.typicode.com/todos/')
+    todo = r1.json()
+    r2 = requests.get('https://jsonplaceholder.typicode.com/users')
+    user = r2.json()
+    row = []
+    dict1 = {}
+    dict2 = {}
+    for j in user:
+        row = []
+        for i in todo:
+            if j['id'] == i['userId']:
+                dict2['username'] = j['username']
+                dict2['task'] = i['title']
+                dict2['completed'] = i['completed']
+                row.append(dict2)
+        dict1[j['id']] = row
+    path = 'todo_all_employees.json'
+    with open(path,  "w") as jsonfile:
+        data = json.dumps(dict1)
+        jsonfile.write(data)
