@@ -5,23 +5,30 @@ import requests
 
 
 if __name__ == "__main__":
-    r1 = requests.get('https://jsonplaceholder.typicode.com/todos/')
-    todo = r1.json()
-    r2 = requests.get('https://jsonplaceholder.typicode.com/users')
-    user = r2.json()
+    response = requests.get('https://jsonplaceholder.typicode.com/todos/')
+    todo = response.json()
+
     row = []
-    dict1 = {}
-    dict2 = {}
+    response2 = requests.get('https://jsonplaceholder.typicode.com/users')
+    user = response2.json()
+
+    new_dict1 = {}
+
     for j in user:
+
         row = []
         for i in todo:
+
+            new_dict2 = {}
+
             if j['id'] == i['userId']:
-                dict2['username'] = j['username']
-                dict2['task'] = i['title']
-                dict2['completed'] = i['completed']
-                row.append(dict2)
-        dict1[j['id']] = row
+                new_dict2['username'] = j['username']
+                new_dict2['task'] = i['title']
+                new_dict2['completed'] = i['completed']
+                row.append(new_dict2)
+
+        new_dict1[j['id']] = row
     path = 'todo_all_employees.json'
     with open(path,  "w") as jsonfile:
-        data = json.dumps(dict1)
-        jsonfile.write(data)
+        json_obj = json.dumps(new_dict1)
+        jsonfile.write(json_obj)
