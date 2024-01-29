@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 ''' information about his/her TODO list progress '''
-import requests
-from sys import argv
 import csv
+from sys import argv
+import requests
+
 
 if __name__ == "__main__":
     e_id = argv[1]
